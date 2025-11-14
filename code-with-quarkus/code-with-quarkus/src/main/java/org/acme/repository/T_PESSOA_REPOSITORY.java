@@ -3,9 +3,7 @@ package org.acme.repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.acme.model.DTO.DTO_T_PESSOA;
-import org.acme.model.T_ENDERECO;
-import org.acme.model.T_LOGIN;
+
 import org.acme.model.T_PESSOA;
 
 import javax.sql.DataSource;

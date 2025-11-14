@@ -1,6 +1,7 @@
 package org.acme.model;
 
 public class T_ENDERECO {
+
     private long id_endereco;
     private String cep;
     private String pais;
@@ -8,10 +9,11 @@ public class T_ENDERECO {
     private String cidade;
     private String bairro;
     private String rua;
+    private int numero;
     private String complemento;
 
     // Todos os campos
-    public T_ENDERECO(long id_endereco, String cep, String pais, String estado, String cidade, String bairro, String rua, String complemento) {
+    public T_ENDERECO(long id_endereco, String cep, String pais, String estado, String cidade, String bairro, String rua,int numero, String complemento) {
         this.id_endereco = id_endereco;
         this.cep = cep;
         this.pais = pais;
@@ -19,11 +21,12 @@ public class T_ENDERECO {
         this.cidade = cidade;
         this.bairro = bairro;
         this.rua = rua;
+        this.numero = numero;
         this.complemento = complemento;
     }
 
     // Construtor sem complemento
-    public T_ENDERECO(long id_endereco, String cep, String pais, String estado, String cidade, String bairro, String rua) {
+    public T_ENDERECO(long id_endereco, String cep, String pais, String estado, String cidade, String bairro, String rua,int numero) {
         this.id_endereco = id_endereco;
         this.cep = cep;
         this.pais = pais;
@@ -31,6 +34,7 @@ public class T_ENDERECO {
         this.cidade = cidade;
         this.bairro = bairro;
         this.rua = rua;
+        this.numero = numero;
     }
 
     public long getId_endereco() {
@@ -87,6 +91,14 @@ public class T_ENDERECO {
 
     public void setRua(String rua) {
         this.rua = rua;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public String getComplemento() {
