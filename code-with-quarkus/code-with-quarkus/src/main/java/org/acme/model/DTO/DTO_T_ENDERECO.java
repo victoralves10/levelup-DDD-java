@@ -1,7 +1,6 @@
-package org.acme.model;
+package org.acme.model.DTO;
 
-public class T_ENDERECO {
-    private long id_endereco;
+public class DTO_T_ENDERECO {
     private String cep;
     private String pais;
     private String estado;
@@ -10,9 +9,8 @@ public class T_ENDERECO {
     private String rua;
     private String complemento;
 
-    // Todos os campos
-    public T_ENDERECO(long id_endereco, String cep, String pais, String estado, String cidade, String bairro, String rua, String complemento) {
-        this.id_endereco = id_endereco;
+
+    public DTO_T_ENDERECO(String cep, String pais, String estado, String cidade, String bairro, String rua, String complemento) {
         this.cep = cep;
         this.pais = pais;
         this.estado = estado;
@@ -22,23 +20,13 @@ public class T_ENDERECO {
         this.complemento = complemento;
     }
 
-    // Construtor sem complemento
-    public T_ENDERECO(long id_endereco, String cep, String pais, String estado, String cidade, String bairro, String rua) {
-        this.id_endereco = id_endereco;
-        this.cep = cep;
-        this.pais = pais;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.bairro = bairro;
+    public DTO_T_ENDERECO(String rua, String bairro, String cidade, String estado, String pais, String cep) {
         this.rua = rua;
-    }
-
-    public long getId_endereco() {
-        return id_endereco;
-    }
-
-    public void setId_endereco(long id_endereco) {
-        this.id_endereco = id_endereco;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.pais = pais;
+        this.cep = cep;
     }
 
     public String getCep() {
