@@ -21,7 +21,7 @@ public class T_LOGIN_REPOSITORY {
 
     public List<T_LOGIN> listarLogins() throws SQLException {
         List<T_LOGIN> listaLogins = new ArrayList<>();
-        String sql = "SELECT * FROM T_LOGIN";
+        String sql = "SELECT * FROM T_LVUP_LOGIN";
         try(Connection conn = dataSource.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql)){
 
