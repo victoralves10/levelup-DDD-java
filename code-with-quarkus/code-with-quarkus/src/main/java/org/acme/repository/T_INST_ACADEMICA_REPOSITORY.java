@@ -25,8 +25,9 @@ public class T_INST_ACADEMICA_REPOSITORY {
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
-                listaInstAcademica.add(new T_INST_ACADEMICA(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(4)))
+                listaInstAcademica.add(new T_INST_ACADEMICA(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(4)));
             }
+            return listaInstAcademica
         }
 
 
