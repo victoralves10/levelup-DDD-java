@@ -3,7 +3,7 @@ package org.acme.model.DTO;
 import org.acme.model.T_ENDERECO;
 import org.acme.model.T_LVUP_LOGIN;
 
-public class DT_T_INST_ACADEMICA {
+public class DTO_T_INST_ACADEMICA {
     private String nm_instAcademica;
     private String st_ativo;
     private String cnpj;
@@ -11,7 +11,7 @@ public class DT_T_INST_ACADEMICA {
     private T_LVUP_LOGIN login;
 
     // Construtor Completo
-    public DT_T_INST_ACADEMICA(String nm_instAcademica, String st_ativo, String cnpj, T_ENDERECO endereco, T_LVUP_LOGIN login) {
+    public DTO_T_INST_ACADEMICA(String nm_instAcademica, String st_ativo, String cnpj, T_ENDERECO endereco, T_LVUP_LOGIN login) {
         this.nm_instAcademica = nm_instAcademica;
         this.st_ativo = st_ativo;
         this.cnpj = cnpj;

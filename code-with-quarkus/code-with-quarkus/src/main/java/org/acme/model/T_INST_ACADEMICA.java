@@ -18,7 +18,16 @@ public class T_INST_ACADEMICA {
         this.login = login;
     }
 
+    //CONSTRUTOR SEM FK'S (para exibição)
+    public T_INST_ACADEMICA(long id_instAcademica, String nm_instAcademica, String st_ativo, String cnpj) {
+        this.id_instAcademica = id_instAcademica;
+        this.nm_instAcademica = nm_instAcademica;
+        this.st_ativo = st_ativo;
+        this.cnpj = cnpj;
+    }
 
+
+    // ------- GETTER E SETTER --------
     public long getId_instAcademica() {
         return id_instAcademica;
     }
