@@ -21,6 +21,8 @@ public class GreetingResource {
     EmpresaService empresaService;
     @Inject
     InstAcademicaService instAcademicaService;
+    @Inject
+    VagaEmpresaService vagaEmpresaService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -78,4 +80,18 @@ public class GreetingResource {
 
         }
     }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/vagasDFasEmpresas")
+    public Response listarVagasDasEmpresas(){
+        try {
+            return Response.ok(vagaEmpresaService.listarVagasDasEmpresas()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+
+        }
+    }
+
 }
