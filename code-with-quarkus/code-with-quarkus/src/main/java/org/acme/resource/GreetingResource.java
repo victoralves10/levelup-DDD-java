@@ -4,10 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.service.EmpresaService;
-import org.acme.service.EnderecoService;
-import org.acme.service.LoginService;
-import org.acme.service.PessoaService;
+import org.acme.service.*;
 
 import java.sql.SQLException;
 
@@ -22,6 +19,8 @@ public class GreetingResource {
     LoginService loginService;
     @Inject
     EmpresaService empresaService;
+    @Inject
+    InstAcademicaService instAcademicaService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,11 +58,24 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/empresas")
-    public Response listaEmpresas(){
+    public Response listarEmpresas(){
         try {
             return Response.ok(empresaService.listarEmpresas()).build();
         } catch (SQLException e) {
             return Response.serverError().build();
+        }
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/instAcademicas")
+    public Response listarInstAcademicas(){
+        try {
+            return Response.ok(instAcademicaService.listarInstAcademicas()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+
         }
     }
 }
