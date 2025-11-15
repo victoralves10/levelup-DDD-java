@@ -84,7 +84,7 @@ public class GreetingResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/vagasDFasEmpresas")
+    @Path("/vagasDasEmpresas")
     public Response listarVagasDasEmpresas(){
         try {
             return Response.ok(vagaEmpresaService.listarVagasDasEmpresas()).build();
