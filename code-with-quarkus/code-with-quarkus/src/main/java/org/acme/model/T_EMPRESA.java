@@ -10,9 +10,34 @@ public class T_EMPRESA {
     private String email_empresa;
     private Date dt_cadastro;
     private String st_empresa;
+    private T_ENDERECO endereco;
+    private T_LOGIN login;
 
-    // FK's foram ignoradas (por enquanto)
+    //Constutor Completo
+    public T_EMPRESA(long id_empresa, String nm_empresa, String cnpj_empresa, String email_empresa, Date dt_cadastro, String st_empresa, T_ENDERECO endereco, T_LOGIN login) {
+        this.id_empresa = id_empresa;
+        this.nm_empresa = nm_empresa;
+        this.cnpj_empresa = cnpj_empresa;
+        this.email_empresa = email_empresa;
+        this.dt_cadastro = dt_cadastro;
+        this.st_empresa = st_empresa;
+        this.endereco = endereco;
+        this.login = login;
+    }
 
+    //Construtor sem endereco
+    public T_EMPRESA(long id_empresa, String nm_empresa, String cnpj_empresa, String email_empresa, Date dt_cadastro, String st_empresa,T_LOGIN login) {
+        this.id_empresa = id_empresa;
+        this.nm_empresa = nm_empresa;
+        this.cnpj_empresa = cnpj_empresa;
+        this.email_empresa = email_empresa;
+        this.dt_cadastro = dt_cadastro;
+        this.st_empresa = st_empresa;
+        this.login = login;
+
+    }
+
+    // TESTE (SEM FK's)
     public T_EMPRESA(long id_empresa, String nm_empresa, String cnpj_empresa, String email_empresa, Date dt_cadastro, String st_empresa) {
         this.id_empresa = id_empresa;
         this.nm_empresa = nm_empresa;
@@ -21,6 +46,10 @@ public class T_EMPRESA {
         this.dt_cadastro = dt_cadastro;
         this.st_empresa = st_empresa;
     }
+
+
+
+    // ---------------- GETTER AND SETTER --------------------
 
     public long getId_empresa() {
         return id_empresa;
