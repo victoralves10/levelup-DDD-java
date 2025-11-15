@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.service.EmpresaService;
 import org.acme.service.EnderecoService;
 import org.acme.service.LoginService;
 import org.acme.service.PessoaService;
@@ -19,6 +20,8 @@ public class GreetingResource {
     EnderecoService enderecoService;
     @Inject
     LoginService loginService;
+    @Inject
+    EmpresaService empresaService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -48,6 +51,17 @@ public class GreetingResource {
     public Response listarLogins() {
         try {
             return Response.ok(loginService.listarLogins()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/empresas")
+    public Response listaEmpresas(){
+        try {
+            return Response.ok(empresaService.listarEmpresas()).build();
         } catch (SQLException e) {
             return Response.serverError().build();
         }

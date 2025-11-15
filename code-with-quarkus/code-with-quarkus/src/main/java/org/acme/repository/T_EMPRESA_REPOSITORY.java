@@ -19,7 +19,7 @@ public class T_EMPRESA_REPOSITORY {
     DataSource datasource;
 
     public List<T_EMPRESA> listarEmpresas() throws SQLException {
-        String sql = "SELECT * FROM T_TABELA";
+        String sql = "SELECT * FROM T_EMPRESA";
         List<T_EMPRESA> listaEmpresas = new ArrayList<>();
 
         try (Connection conn = datasource.getConnection();
@@ -29,9 +29,9 @@ public class T_EMPRESA_REPOSITORY {
             while (rs.next()){
                 listaEmpresas.add(new T_EMPRESA(rs.getLong(1), rs.getString(2),rs.getString(3), rs.getString(4),rs.getDate(5),rs.getString(6)));
             }
-
+            return listaEmpresas;
         }
-        return listaEmpresas;
+
     }
 
 }
