@@ -1,7 +1,7 @@
 package org.acme.model.DTO;
 
 import org.acme.model.T_ENDERECO;
-import org.acme.model.T_LOGIN;
+import org.acme.model.T_LVUP_LOGIN;
 
 import java.util.Date;
 
@@ -11,12 +11,12 @@ public class DTO_T_PESSOA {
     private String cpf_pessoa;
     private Date dt_nascimento;
     private T_ENDERECO endereco;
-    private T_LOGIN login;
+    private T_LVUP_LOGIN login;
 
     public DTO_T_PESSOA() {
     }
     //CONSTRUTOR COM TODOS OS CAMPOS PREENCHIDOS
-    public DTO_T_PESSOA( String nm_pessoa, String cpf_pessoa, Date dt_nascimento, T_ENDERECO endereco, T_LOGIN login) {
+    public DTO_T_PESSOA( String nm_pessoa, String cpf_pessoa, Date dt_nascimento, T_ENDERECO endereco, T_LVUP_LOGIN login) {
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
         this.dt_nascimento = dt_nascimento;
@@ -25,7 +25,7 @@ public class DTO_T_PESSOA {
     }
 
     //CONSTRUTOR SEM ENDERECO
-    public DTO_T_PESSOA(String nm_pessoa, String cpf_pessoa, Date dt_nascimento, T_LOGIN login) {
+    public DTO_T_PESSOA(String nm_pessoa, String cpf_pessoa, Date dt_nascimento, T_LVUP_LOGIN login) {
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
         this.dt_nascimento = dt_nascimento;
@@ -64,11 +64,11 @@ public class DTO_T_PESSOA {
         this.endereco = endereco;
     }
 
-    public T_LOGIN getLogin() {
+    public T_LVUP_LOGIN getLogin() {
         return login;
     }
 
-    public void setLogin(T_LOGIN login) {
+    public void setLogin(T_LVUP_LOGIN login) {
         this.login = login;
     }
 

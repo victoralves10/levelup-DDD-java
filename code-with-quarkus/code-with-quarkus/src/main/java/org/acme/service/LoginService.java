@@ -2,7 +2,7 @@ package org.acme.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.acme.model.T_LOGIN;
+import org.acme.model.T_LVUP_LOGIN;
 import org.acme.repository.T_LOGIN_REPOSITORY;
 
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ public class LoginService {
     @Inject
     T_LOGIN_REPOSITORY loginRepository;
 
-    public List<T_LOGIN> listarLogins() throws SQLException {
+    public List<T_LVUP_LOGIN> listarLogins() throws SQLException {
 
         return loginRepository.listarLogins();
     }

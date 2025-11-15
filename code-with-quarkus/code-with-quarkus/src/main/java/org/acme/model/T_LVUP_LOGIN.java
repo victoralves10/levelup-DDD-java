@@ -1,13 +1,13 @@
 package org.acme.model;
 
-public class T_LOGIN {
+public class T_LVUP_LOGIN {
     private long id_login;
     private String login;
     private String senha;
     private String st_ativo;
 
     // CONSTRUTOR COMPLETO
-    public T_LOGIN(long id_login, String login, String senha, String st_ativo) {
+    public T_LVUP_LOGIN(long id_login, String login, String senha, String st_ativo) {
         this.id_login = id_login;
         this.login = login;
         this.senha = senha;

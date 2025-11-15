@@ -11,10 +11,10 @@ public class T_EMPRESA {
     private Date dt_cadastro;
     private String st_empresa;
     private T_ENDERECO endereco;
-    private T_LOGIN login;
+    private T_LVUP_LOGIN login;
 
     //Constutor Completo
-    public T_EMPRESA(long id_empresa, String nm_empresa, String cnpj_empresa, String email_empresa, Date dt_cadastro, String st_empresa, T_ENDERECO endereco, T_LOGIN login) {
+    public T_EMPRESA(long id_empresa, String nm_empresa, String cnpj_empresa, String email_empresa, Date dt_cadastro, String st_empresa, T_ENDERECO endereco, T_LVUP_LOGIN login) {
         this.id_empresa = id_empresa;
         this.nm_empresa = nm_empresa;
         this.cnpj_empresa = cnpj_empresa;
@@ -26,7 +26,7 @@ public class T_EMPRESA {
     }
 
     //Construtor sem endereco
-    public T_EMPRESA(long id_empresa, String nm_empresa, String cnpj_empresa, String email_empresa, Date dt_cadastro, String st_empresa,T_LOGIN login) {
+    public T_EMPRESA(long id_empresa, String nm_empresa, String cnpj_empresa, String email_empresa, Date dt_cadastro, String st_empresa, T_LVUP_LOGIN login) {
         this.id_empresa = id_empresa;
         this.nm_empresa = nm_empresa;
         this.cnpj_empresa = cnpj_empresa;
