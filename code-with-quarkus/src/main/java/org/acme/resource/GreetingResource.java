@@ -110,5 +110,12 @@ public class GreetingResource {
         return Response.ok().build();
     }
 
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces (MediaType.APPLICATION_JSON)
+    public  Response deletarConta(){
+
+        return Response.ok().build();
+    }
 
 }
