@@ -16,6 +16,7 @@ public class EmpresaService {
 
     public List<T_EMPRESA> listarEmpresas () throws SQLException {
 
+
         return empresaRepository.listarEmpresas();
     }
 

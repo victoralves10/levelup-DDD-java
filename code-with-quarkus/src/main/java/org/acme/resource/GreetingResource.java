@@ -94,4 +94,21 @@ public class GreetingResource {
         }
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces (MediaType.APPLICATION_JSON)
+    public  Response fazerLogin(){
+
+        return Response.ok().build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces (MediaType.APPLICATION_JSON)
+    public  Response criarConta(){
+
+        return Response.ok().build();
+    }
+
+
 }
