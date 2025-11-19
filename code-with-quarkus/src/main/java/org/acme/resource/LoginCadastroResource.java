@@ -19,7 +19,7 @@ public class LoginCadastroResource {
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces (MediaType.APPLICATION_JSON)
-    public  Response fazerLogin(DTO_T_LOGIN_2 loginDigitado)throws SQLException{
+    public  Response fazerLogin(DTO_T_LOGIN_2 loginDigitado){
 
         try{
             return Response.ok(loginService.loginExistente(loginDigitado)).build();

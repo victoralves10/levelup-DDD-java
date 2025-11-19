@@ -12,12 +12,12 @@ public class DTO_JOIN_INSTITUICAO_LOGIN {
     private String nm_instituicao;
     private String cnpj_instituicao;
 
-    public DTO_JOIN_INSTITUICAO_LOGIN(String cnpj_instituicao, long id_instituicao, long id_login, String login, String nm_instituicao, String senha, String st_ativo) {
-        this.cnpj_instituicao = cnpj_instituicao;
+    public DTO_JOIN_INSTITUICAO_LOGIN(long id_instituicao, String nm_instituicao, String cnpj_instituicao, long id_login, String login, String senha, String st_ativo) {
         this.id_instituicao = id_instituicao;
+        this.nm_instituicao = nm_instituicao;
+        this.cnpj_instituicao = cnpj_instituicao;
         this.id_login = id_login;
         this.login = login;
-        this.nm_instituicao = nm_instituicao;
         this.senha = senha;
         this.st_ativo = st_ativo;
     }
