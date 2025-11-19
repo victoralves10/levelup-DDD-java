@@ -38,5 +38,5 @@ public class T_ENDERECO_REPOSITORY {
         return listaEnderecos;
     }
 
-    
+
 }
