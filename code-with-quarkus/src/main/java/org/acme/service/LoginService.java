@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.model.DTO.AUTENTICACAO.DTO_AUTENTICACAO_RETORNO;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
+import org.acme.model.DTO.JOINS.DTO_JOIN_EMPRESA_LOGIN;
 import org.acme.model.DTO.JOINS.DTO_JOIN_PESSOA_LOGIN;
 import org.acme.model.T_INST_ACADEMICA;
 import org.acme.model.T_LVUP_LOGIN;
@@ -38,11 +39,12 @@ public class LoginService {
         String nm_usuario;
 
         DTO_JOIN_PESSOA_LOGIN possivelPessoa = pessoaRepository.autenticaPessoaLogin(loginDigitado);
+        DTO_JOIN_EMPRESA_LOGIN possivelEmpresa = empresaRepository.autenticaEmpresaLogin(loginDigitado);
 
         if (possivelPessoa != null){
             perfil = "pessoa";
-        } else if (empresaRepository.) {
-
+        } else if (possivelEmpresa!=null) {
+            perfil = "empresa";
         } else if (instAcademicaRepository.) {
 
         }else {
