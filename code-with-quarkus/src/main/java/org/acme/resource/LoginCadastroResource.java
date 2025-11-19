@@ -9,7 +9,7 @@ import org.acme.service.LoginService;
 
 import java.sql.SQLException;
 
-@Path("login")
+@Path("/login")
 public class LoginCadastroResource {
 
     @Inject
