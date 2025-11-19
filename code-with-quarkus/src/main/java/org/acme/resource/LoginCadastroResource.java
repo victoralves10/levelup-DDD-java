@@ -9,13 +9,14 @@ import org.acme.service.LoginService;
 
 import java.sql.SQLException;
 
+@Path("login")
 public class LoginCadastroResource {
 
     @Inject
     LoginService loginService;
 
     @POST
-    @Path("login")
+    @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces (MediaType.APPLICATION_JSON)
     public  Response fazerLogin(DTO_T_LOGIN_2 loginDigitado)throws SQLException{
