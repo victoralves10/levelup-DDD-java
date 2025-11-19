@@ -28,8 +28,7 @@ public class LoginCadastroResource {
             return Response.serverError().build();
 
         }catch (IllegalArgumentException il){
-            return Response.noContent().build();
-
+            return Response.status(Response.Status.UNAUTHORIZED).entity(il.getMessage()).build();
         }
     }
 
