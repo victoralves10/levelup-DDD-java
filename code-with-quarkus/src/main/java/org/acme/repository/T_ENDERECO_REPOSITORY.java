@@ -2,6 +2,8 @@ package org.acme.repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.model.DTO.DTO_T_LOGIN_2;
+import org.acme.model.DTO.JOINS.DTO_JOIN_EMPRESA_LOGIN;
 import org.acme.model.T_ENDERECO;
 
 import javax.sql.DataSource;
@@ -35,4 +37,6 @@ public class T_ENDERECO_REPOSITORY {
 
         return listaEnderecos;
     }
+
+    
 }
