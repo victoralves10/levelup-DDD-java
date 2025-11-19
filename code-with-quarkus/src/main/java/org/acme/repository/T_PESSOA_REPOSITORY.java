@@ -38,10 +38,6 @@ public class T_PESSOA_REPOSITORY {
             }
             return lista;
         }
-
     }
-/*
-    public void inserir(DTO_T_PESSOA pessoa) {
 
-    }*/
 }

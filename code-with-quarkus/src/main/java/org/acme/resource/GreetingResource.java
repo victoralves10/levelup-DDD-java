@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.service.*;
 
 import java.sql.SQLException;
@@ -97,15 +98,7 @@ public class GreetingResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces (MediaType.APPLICATION_JSON)
-    public  Response fazerLogin(){
-
-        return Response.ok().build();
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces (MediaType.APPLICATION_JSON)
-    public  Response criarConta(){
+    public  Response criarConta_Empresa(){
 
         return Response.ok().build();
     }

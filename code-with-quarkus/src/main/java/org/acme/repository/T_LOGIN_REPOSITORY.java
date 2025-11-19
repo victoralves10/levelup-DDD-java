@@ -3,6 +3,7 @@ package org.acme.repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.model.T_LVUP_LOGIN;
 
 import javax.sql.DataSource;
@@ -32,5 +33,30 @@ public class T_LOGIN_REPOSITORY {
 
         }
         return listaLogins;
+    }
+
+
+    public List<DTO_T_LOGIN_2> procurarLogin(DTO_T_LOGIN_2 loginDigitado) throws SQLException {
+        List<DTO_T_LOGIN_2> listaVerificada = new ArrayList<>();
+        String sql = "SELECT login,senha FROM T_LVUP_LOGIN where login=? AND senha=?";
+
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+
+            pst.setString(1,loginDigitado.getLogin());
+            pst.setString(2,loginDigitado.getSenha());
+
+            ResultSet res = pst.executeQuery();
+
+            while(res.next()){
+                String loginBD =res.getString(1);
+                String senhaBD =res.getString(2);
+
+                listaVerificada.add(new DTO_T_LOGIN_2(loginBD,senhaBD));
+            }
+
+            return listaVerificada;
+        }
+
     }
 }
