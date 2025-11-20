@@ -25,7 +25,7 @@ public class LoginCadastroResource {
             return Response.ok(loginService.loginExistente(loginDigitado)).build();
 
         }catch (SQLException e){
-            return Response.serverError().build();
+            return Response.serverError().entity(e.getMessage()).build();
 
         }catch (IllegalArgumentException il){
             return Response.status(Response.Status.UNAUTHORIZED).entity(il.getMessage()).build();

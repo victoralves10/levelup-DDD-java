@@ -39,8 +39,8 @@ public class T_INST_ACADEMICA_REPOSITORY {
         DTO_JOIN_INSTITUICAO_LOGIN InstituicaoLogin = null;
 
         String sql = """
-            SELECT i.id_instituicao, i.nm_instituicao, i.cnpj_instituicao, l.id_login, l.login, l.senha, l.st_ativo 
-            FROM T_INSTITUICAO i 
+            SELECT i.id_instAcademica\s, i.nm_instAcademica, i.cnpj_inst_academica, l.id_login, l.login, l.senha, l.st_ativo 
+            FROM T_INST_ACADEMICA i 
             INNER JOIN T_LVUP_LOGIN l ON i.id_login = l.id_login
             WHERE l.login=? AND l.senha=?""";
 

@@ -4,7 +4,7 @@ public class DTO_T_LOGIN_2 {
 
     private String login;
     private String senha;
-    private long token;
+
 
     public DTO_T_LOGIN_2(String login, String senha) {
         this.login = login;
@@ -26,12 +26,5 @@ public class DTO_T_LOGIN_2 {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public long getToken() {
-        return token;
-    }
-
-    public void setToken(long token) {
-        this.token = token;
-    }
+    
 }
