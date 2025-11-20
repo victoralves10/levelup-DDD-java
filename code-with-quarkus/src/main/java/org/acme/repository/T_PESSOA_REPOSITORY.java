@@ -4,7 +4,9 @@ package org.acme.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import org.acme.model.DTO.CADASTRO.PessoaCadastro;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
+import org.acme.model.DTO.DTO_T_PESSOA;
 import org.acme.model.DTO.JOINS.DTO_JOIN_PESSOA_LOGIN;
 import org.acme.model.T_PESSOA;
 
@@ -81,4 +83,11 @@ public class T_PESSOA_REPOSITORY {
         } // con e pst são fechados automaticamente aqui
     }
 
+
+    public void inserirPessoa(PessoaCadastro np)throws SQLException{
+        String sql = "INSERT INTO T_PESSOA(nm_empresa,cpf_pessoa,dt_nascimento,st_empresa,id_enderco,id_login) VALUES (?,?,?,?,?,?,?)";
+
+
+
+    }
 }
