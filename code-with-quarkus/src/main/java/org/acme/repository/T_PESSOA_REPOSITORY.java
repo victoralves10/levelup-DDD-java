@@ -88,8 +88,10 @@ public class T_PESSOA_REPOSITORY {
     }
 
         //INSERÇÃO
-    public void inserirPessoa(DTO_T_PESSOA np) throws SQLException {
-            String sql = """
+    public boolean inserirPessoa(DTO_T_PESSOA np) throws SQLException {
+        int linhasAfetadas = 0;
+
+        String sql = """
         INSERT INTO T_PESSOA
         (nm_pessoa, cpf_pessoa, dt_nascimento, id_endereco, id_login)
         VALUES (?, ?, ?, ?, ?)
@@ -98,34 +100,37 @@ public class T_PESSOA_REPOSITORY {
         try (Connection con = dataSource.getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
 
-            // Campo 1 – Nome
             pst.setString(1, np.getNm_pessoa());
-
-            // Campo 2 – CPF
             pst.setString(2, np.getCpf_pessoa());
-
-            // Campo 3 – Data de nascimento
             pst.setDate(3, java.sql.Date.valueOf(np.getDt_nascimento()));
-
-            // Campo 4 – Endereco
             pst.setLong(4, np.getEndereco().getId_endereco());
-
-
-
-            // Campo 5 – Login (obrigatório)
             pst.setLong(5, np.getLogin().getId_login());
 
-            pst.executeUpdate();
+            linhasAfetadas = pst.executeUpdate();
         }
+
+        return linhasAfetadas > 0;
     }
 
-        //REMOÇÃO
-    public void removerPessoa(Long id)throws SQLException{
+
+    //REMOÇÃO
+    public boolean removerPessoa(Long id) throws SQLException {
+        int linhasAfetadas = 0;
+
         String sql = """
-                """;
-        try(Connection con = dataSource.getConnection();
-            PreparedStatement pst = con.prepareStatement(sql)){
+            DELETE FROM T_PESSOA
+            WHERE id_pessoa = ?
+            """;
 
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setLong(1, id);
+
+            linhasAfetadas = pst.executeUpdate();
         }
+
+        return linhasAfetadas > 0;
     }
+
 }
