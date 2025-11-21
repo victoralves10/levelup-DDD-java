@@ -50,13 +50,14 @@ public class T_ENDERECO_REPOSITORY {
         Long idGerado = null;
 
         String sql = """
-            INSERT INTO T_ENDERECO
-            (cep, pais, estado, cidade, bairro, rua, numero, complemento)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """;
+        INSERT INTO T_ENDERECO
+        (cep, pais, estado, cidade, bairro, rua, numero, complemento)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """;
 
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement pst = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+             // Informando explicitamente a coluna de identidade para o Oracle
+             PreparedStatement pst = conn.prepareStatement(sql, new String[]{"ID_ENDERECO"})) {
 
             pst.setString(1, novoEndereco.getCep());
             pst.setString(2, novoEndereco.getPais());
@@ -64,14 +65,20 @@ public class T_ENDERECO_REPOSITORY {
             pst.setString(4, novoEndereco.getCidade());
             pst.setString(5, novoEndereco.getBairro());
             pst.setString(6, novoEndereco.getRua());
-            pst.setInt(7, novoEndereco.getNumero());     // setInt porque numero é INTEGER
+            pst.setInt(7, novoEndereco.getNumero());
             pst.setString(8, novoEndereco.getComplemento());
 
-            pst.executeUpdate();
+            int linhasAfetadas = pst.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new SQLException("Falha ao inserir endereço, nenhuma linha afetada.");
+            }
+            System.out.println("Endereco inserido");
 
+            // Captura o ID gerado
             try (ResultSet rs = pst.getGeneratedKeys()) {
                 if (rs.next()) {
                     idGerado = rs.getLong(1);
+                    System.out.println("ID de endereco pego: " + idGerado);
                 } else {
                     throw new SQLException("Nenhum ID foi retornado ao inserir ENDEREÇO.");
                 }
@@ -80,6 +87,7 @@ public class T_ENDERECO_REPOSITORY {
 
         return idGerado;
     }
+
 
 
 }

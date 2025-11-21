@@ -1,23 +1,25 @@
 package org.acme.model.DTO.CADASTRO;
 
-public class PessoaCadastro {
+public class EmpresaCadastro {
 
     // =============================
-    // DADOS DE LOGIN
+    // DADOS DE LOGIN (T_LVUP_LOGIN)
     // =============================
     private String login;
     private String senha;
     private String confirmar_senha; // Campo de controle do frontend
 
     // =============================
-    // DADOS PESSOAIS
+    // DADOS DA EMPRESA (T_EMPRESA)
     // =============================
-    private String nome;
-    private String cpf;
-    private String data_nascimento; // Mantido como string para receber do frontend
+    private String nome_empresa;      // nm_empresa
+    private String cnpj;              // cnpj_empresa
+    private String email;             // email_empresa
+    private String status;            // st_empresa ('A' ou 'I')
+    private String dt_cadastro;       // Mantido como string para receber do frontend
 
     // =============================
-    // ENDEREÇO (compatível com T_ENDERECO)
+    // ENDEREÇO (T_ENDERECO)
     // =============================
     private String cep;
     private String pais;
@@ -31,7 +33,6 @@ public class PessoaCadastro {
     // =============================
     // GETTERS E SETTERS
     // =============================
-
     public String getLogin() { return login; }
     public void setLogin(String login) { this.login = login; }
 
@@ -41,14 +42,20 @@ public class PessoaCadastro {
     public String getConfirmar_senha() { return confirmar_senha; }
     public void setConfirmar_senha(String confirmar_senha) { this.confirmar_senha = confirmar_senha; }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    public String getNome_empresa() { return nome_empresa; }
+    public void setNome_empresa(String nome_empresa) { this.nome_empresa = nome_empresa; }
 
-    public String getCpf() { return cpf; }
-    public void setCpf(String cpf) { this.cpf = cpf; }
+    public String getCnpj() { return cnpj; }
+    public void setCnpj(String cnpj) { this.cnpj = cnpj; }
 
-    public String getData_nascimento() { return data_nascimento; }
-    public void setData_nascimento(String data_nascimento) { this.data_nascimento = data_nascimento; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getDt_cadastro() { return dt_cadastro; }
+    public void setDt_cadastro(String dt_cadastro) { this.dt_cadastro = dt_cadastro; }
 
     public String getCep() { return cep; }
     public void setCep(String cep) { this.cep = cep; }

@@ -90,26 +90,31 @@ public class T_PESSOA_REPOSITORY {
     // INSERÇÃO
     public boolean inserirPessoa(DTO_T_PESSOA np) throws SQLException {
         String sql = """
-            INSERT INTO T_PESSOA (nm_pessoa, cpf_pessoa, dt_nascimento, id_endereco, id_login)
-            VALUES (?, ?, ?, ?, ?)
-        """;
-
-        int linhasAfetadas;
+        INSERT INTO T_PESSOA (nm_pessoa, cpf_pessoa, dt_nascimento, id_endereco, id_login)
+        VALUES (?, ?, ?, ?, ?)
+    """;
 
         try (Connection con = dataSource.getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setString(1, np.getNm_pessoa());
             pst.setString(2, np.getCpf_pessoa());
-            pst.setDate(3, java.sql.Date.valueOf(np.getDt_nascimento()));
+
+            // Proteção contra null
+            if (np.getDt_nascimento() != null) {
+                pst.setDate(3, java.sql.Date.valueOf(np.getDt_nascimento()));
+            } else {
+                pst.setNull(3, java.sql.Types.DATE);
+            }
+
             pst.setLong(4, np.getId_endereco());
             pst.setLong(5, np.getId_login());
 
-            linhasAfetadas = pst.executeUpdate();
+            int linhasAfetadas = pst.executeUpdate();
+            return linhasAfetadas > 0;
         }
-
-        return linhasAfetadas > 0;
     }
+
 
     // REMOÇÃO
     public boolean removerPessoa(Long id) throws SQLException {
