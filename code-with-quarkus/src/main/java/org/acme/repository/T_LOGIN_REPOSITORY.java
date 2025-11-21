@@ -20,6 +20,7 @@ public class T_LOGIN_REPOSITORY {
     @Inject
     DataSource dataSource;
 
+        //SELECT
     public List<T_LVUP_LOGIN> listarLogins() throws SQLException {
         List<T_LVUP_LOGIN> listaLogins = new ArrayList<>();
         String sql = "SELECT * FROM T_LVUP_LOGIN";
@@ -35,7 +36,7 @@ public class T_LOGIN_REPOSITORY {
         return listaLogins;
     }
 
-
+        //LOGIN
     public List<DTO_T_LOGIN_2> procurarLogin(DTO_T_LOGIN_2 loginDigitado) throws SQLException {
         List<DTO_T_LOGIN_2> listaVerificada = new ArrayList<>();
         String sql = "SELECT login,senha FROM T_LVUP_LOGIN where login=? AND senha=?";
@@ -59,4 +60,6 @@ public class T_LOGIN_REPOSITORY {
         }
 
     }
+
+    
 }

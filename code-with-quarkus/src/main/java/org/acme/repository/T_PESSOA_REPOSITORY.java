@@ -24,6 +24,7 @@ public class T_PESSOA_REPOSITORY {
     @Inject
     DataSource dataSource;
 
+        // SELECT
     public List<T_PESSOA> listarGeral() throws SQLException {
         String sql = """
             SELECT
@@ -113,7 +114,7 @@ public class T_PESSOA_REPOSITORY {
     }
 
 
-    //REMOÇÃO
+        //REMOÇÃO
     public boolean removerPessoa(Long id) throws SQLException {
         int linhasAfetadas = 0;
 
