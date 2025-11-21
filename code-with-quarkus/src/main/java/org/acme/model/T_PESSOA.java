@@ -1,20 +1,21 @@
 package org.acme.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class T_PESSOA {
     // atributos
     private long id_pessoa;
     private String nm_pessoa;
     private String cpf_pessoa;
-    private Date dt_nascimento;
+    private LocalDate dt_nascimento;
     private T_ENDERECO endereco;
     private T_LVUP_LOGIN login;
 
     public T_PESSOA() {
     }
     //CONSTRUTOR COM TODOS OS CAMPOS PREENCHIDOS
-    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa, Date dt_nascimento, T_ENDERECO endereco, T_LVUP_LOGIN login) {
+    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, T_ENDERECO endereco, T_LVUP_LOGIN login) {
         this.id_pessoa = id_pessoa;
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
@@ -24,7 +25,7 @@ public class T_PESSOA {
     }
 
     //CONSTRUTOR SEM ENDERECO
-    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa, Date dt_nascimento, T_LVUP_LOGIN login) {
+    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, T_LVUP_LOGIN login) {
         this.id_pessoa = id_pessoa;
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
@@ -33,7 +34,7 @@ public class T_PESSOA {
     }
 
     // TESTE
-    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa,Date dt_nascimento) {
+    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa,LocalDate dt_nascimento) {
         this.id_pessoa = id_pessoa;
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
@@ -46,7 +47,7 @@ public class T_PESSOA {
         return id_pessoa;
     }
 
-    public void setId_pessoa(int id_pessoa) {
+    public void setId_pessoa(long id_pessoa) {
         this.id_pessoa = id_pessoa;
     }
 
@@ -66,11 +67,11 @@ public class T_PESSOA {
         this.cpf_pessoa = cpf_pessoa;
     }
 
-    public Date getDt_nascimento() {
+    public LocalDate getDt_nascimento() {
         return dt_nascimento;
     }
 
-    public void setDt_nascimento(Date dt_nascimento) {
+    public void setDt_nascimento(LocalDate dt_nascimento) {
         this.dt_nascimento = dt_nascimento;
     }
 

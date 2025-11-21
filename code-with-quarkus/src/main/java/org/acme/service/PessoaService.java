@@ -26,11 +26,11 @@ public class PessoaService {
     T_INST_ACADEMICA_REPOSITORY instAcademicaRepository;
 
     public List<T_PESSOA> listarGeral() throws SQLException {
-
         return pessoaRepository.listarGeral();
     }
 
     public void criarContaPessoa(PessoaCadastro np){
+
 //       Criar o login -> loginRepository.inserirLogin()
 
 //      Criar o endereco -> -> enderecoRepository.inserirEndereco()

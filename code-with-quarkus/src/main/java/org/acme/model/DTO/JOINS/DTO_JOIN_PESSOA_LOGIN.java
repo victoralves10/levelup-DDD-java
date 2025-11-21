@@ -3,6 +3,7 @@ package org.acme.model.DTO.JOINS;
 import org.acme.model.T_ENDERECO; // Mantendo as dependências originais
 import org.acme.model.T_LVUP_LOGIN; // Mantendo as dependências originais
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class DTO_JOIN_PESSOA_LOGIN {
@@ -20,7 +21,7 @@ public class DTO_JOIN_PESSOA_LOGIN {
     // Construtor para a query de autenticação (simplificado)
     // Assumimos que o SELECT * está retornando:
     // id_pessoa, nm_pessoa, cpf_pessoa, dt_nascimento, id_login, login, senha, st_ativo
-    public DTO_JOIN_PESSOA_LOGIN(long id_pessoa, String nm_pessoa, String cpf_pessoa, Date dt_nascimento, long id_login, String login, String senha, String st_ativo) {
+    public DTO_JOIN_PESSOA_LOGIN(long id_pessoa, String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, long id_login, String login, String senha, String st_ativo) {
         this.id_pessoa = id_pessoa;
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
