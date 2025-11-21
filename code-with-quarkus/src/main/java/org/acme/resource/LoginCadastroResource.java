@@ -11,7 +11,7 @@ import org.acme.service.PessoaService;
 
 import java.sql.SQLException;
 
-@Path("/login")
+@Path("/auth")
 public class LoginCadastroResource {
 
     @Inject
@@ -36,13 +36,19 @@ public class LoginCadastroResource {
         }
     }
 
+
+
     @POST
-    @Path("/cadastroPessoa")
+    @Path("/cadastro/pessoa")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces (MediaType.APPLICATION_JSON)
     public Response criarPessoa(PessoaCadastro novaPessoa){
 
-        return Response.ok(pessoaService.c).build();
+        try {
+            return Response.ok(pessoaService.criarContaPessoa(novaPessoa)).build();
+        } catch (SQLException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Não foi possível cadastrar ").build();
+        }
     }
 
 

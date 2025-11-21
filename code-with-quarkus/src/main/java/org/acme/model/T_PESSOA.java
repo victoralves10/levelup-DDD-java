@@ -2,92 +2,55 @@ package org.acme.model;
 
 import java.time.LocalDate;
 
-
 public class T_PESSOA {
-    // atributos
-    private long id_pessoa;
-    private String nm_pessoa;
-    private String cpf_pessoa;
-    private LocalDate dt_nascimento;
-    private T_ENDERECO endereco;
-    private T_LVUP_LOGIN login;
 
-    public T_PESSOA() {
-    }
-    //CONSTRUTOR COM TODOS OS CAMPOS PREENCHIDOS
-    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, T_ENDERECO endereco, T_LVUP_LOGIN login) {
-        this.id_pessoa = id_pessoa;
-        this.nm_pessoa = nm_pessoa;
-        this.cpf_pessoa = cpf_pessoa;
-        this.dt_nascimento = dt_nascimento;
-        this.endereco = endereco;
-        this.login = login;
-    }
+    private int idPessoa;           // PK
+    private String nome;            // nm_pessoa
+    private String cpf;             // cpf_pessoa
+    private LocalDate dtNascimento; // dt_nascimento
 
-    //CONSTRUTOR SEM ENDERECO
-    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, T_LVUP_LOGIN login) {
-        this.id_pessoa = id_pessoa;
-        this.nm_pessoa = nm_pessoa;
-        this.cpf_pessoa = cpf_pessoa;
-        this.dt_nascimento = dt_nascimento;
-        this.login = login;
+    private long idEndereco;        // obrigatório no front
+    private long idLogin;           // obrigatório
+
+    public T_PESSOA() {}
+
+    // Para SELECT
+    public T_PESSOA(int idPessoa, String nome, String cpf,
+                    LocalDate dtNascimento, long idEndereco, long idLogin) {
+        this.idPessoa = idPessoa;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dtNascimento = dtNascimento;
+        this.idEndereco = idEndereco;
+        this.idLogin = idLogin;
     }
 
-    // TESTE
-    public T_PESSOA(long id_pessoa, String nm_pessoa, String cpf_pessoa,LocalDate dt_nascimento) {
-        this.id_pessoa = id_pessoa;
-        this.nm_pessoa = nm_pessoa;
-        this.cpf_pessoa = cpf_pessoa;
-        this.dt_nascimento = dt_nascimento;
+    // Para INSERT
+    public T_PESSOA(String nome, String cpf,
+                    LocalDate dtNascimento, long idEndereco, long idLogin) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dtNascimento = dtNascimento;
+        this.idEndereco = idEndereco;
+        this.idLogin = idLogin;
     }
 
+    // Getters e Setters
+    public int getIdPessoa() { return idPessoa; }
+    public void setIdPessoa(int idPessoa) { this.idPessoa = idPessoa; }
 
-    // ------------- getter and setter -------------
-    public long getId_pessoa() {
-        return id_pessoa;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setId_pessoa(long id_pessoa) {
-        this.id_pessoa = id_pessoa;
-    }
+    public String getCpf() { return cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
-    public String getNm_pessoa() {
-        return nm_pessoa;
-    }
+    public LocalDate getDtNascimento() { return dtNascimento; }
+    public void setDtNascimento(LocalDate dtNascimento) { this.dtNascimento = dtNascimento; }
 
-    public void setNm_pessoa(String nm_pessoa) {
-        this.nm_pessoa = nm_pessoa;
-    }
+    public long getIdEndereco() { return idEndereco; }
+    public void setIdEndereco(long idEndereco) { this.idEndereco = idEndereco; }
 
-    public String getCpf_pessoa() {
-        return cpf_pessoa;
-    }
-
-    public void setCpf_pessoa(String cpf_pessoa) {
-        this.cpf_pessoa = cpf_pessoa;
-    }
-
-    public LocalDate getDt_nascimento() {
-        return dt_nascimento;
-    }
-
-    public void setDt_nascimento(LocalDate dt_nascimento) {
-        this.dt_nascimento = dt_nascimento;
-    }
-
-    public T_ENDERECO getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(T_ENDERECO endereco) {
-        this.endereco = endereco;
-    }
-
-    public T_LVUP_LOGIN getLogin() {
-        return login;
-    }
-
-    public void setLogin(T_LVUP_LOGIN login) {
-        this.login = login;
-    }
+    public long getIdLogin() { return idLogin; }
+    public void setIdLogin(long idLogin) { this.idLogin = idLogin; }
 }

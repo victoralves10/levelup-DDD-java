@@ -1,76 +1,41 @@
 package org.acme.model.DTO;
 
-import org.acme.model.T_ENDERECO;
-import org.acme.model.T_LVUP_LOGIN;
-
 import java.time.LocalDate;
 
 public class DTO_T_PESSOA {
-    // atributos
+
     private String nm_pessoa;
     private String cpf_pessoa;
     private LocalDate dt_nascimento;
-    private T_ENDERECO endereco;
-    private T_LVUP_LOGIN login;
 
-    public DTO_T_PESSOA() {
-    }
-    //CONSTRUTOR COM TODOS OS CAMPOS PREENCHIDOS
-    public DTO_T_PESSOA( String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, T_ENDERECO endereco, T_LVUP_LOGIN login) {
+    private long id_login;     // FK obrigatório
+    private long id_endereco;  // FK obrigatório no front
+
+    public DTO_T_PESSOA() {}
+
+    public DTO_T_PESSOA(String nm_pessoa, String cpf_pessoa,
+                        LocalDate dt_nascimento, long id_login, long id_endereco) {
+
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
         this.dt_nascimento = dt_nascimento;
-        this.endereco = endereco;
-        this.login = login;
+        this.id_login = id_login;
+        this.id_endereco = id_endereco;
     }
 
-    //CONSTRUTOR SEM ENDERECO
-    public DTO_T_PESSOA(String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, T_LVUP_LOGIN login) {
-        this.nm_pessoa = nm_pessoa;
-        this.cpf_pessoa = cpf_pessoa;
-        this.dt_nascimento = dt_nascimento;
-        this.login = login;
-    }
+    // Getters e setters
+    public String getNm_pessoa() { return nm_pessoa; }
+    public void setNm_pessoa(String nm_pessoa) { this.nm_pessoa = nm_pessoa; }
 
-    public String getNm_pessoa() {
-        return nm_pessoa;
-    }
+    public String getCpf_pessoa() { return cpf_pessoa; }
+    public void setCpf_pessoa(String cpf_pessoa) { this.cpf_pessoa = cpf_pessoa; }
 
-    public void setNm_pessoa(String nm_pessoa) {
-        this.nm_pessoa = nm_pessoa;
-    }
+    public LocalDate getDt_nascimento() { return dt_nascimento; }
+    public void setDt_nascimento(LocalDate dt_nascimento) { this.dt_nascimento = dt_nascimento; }
 
-    public String getCpf_pessoa() {
-        return cpf_pessoa;
-    }
+    public long getId_login() { return id_login; }
+    public void setId_login(long id_login) { this.id_login = id_login; }
 
-    public void setCpf_pessoa(String cpf_pessoa) {
-        this.cpf_pessoa = cpf_pessoa;
-    }
-
-    public LocalDate getDt_nascimento() {
-        return dt_nascimento;
-    }
-
-    public void setDt_nascimento(LocalDate dt_nascimento) {
-        this.dt_nascimento = dt_nascimento;
-    }
-
-    public T_ENDERECO getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(T_ENDERECO endereco) {
-        this.endereco = endereco;
-    }
-
-    public T_LVUP_LOGIN getLogin() {
-        return login;
-    }
-
-    public void setLogin(T_LVUP_LOGIN login) {
-        this.login = login;
-    }
-
-
+    public long getId_endereco() { return id_endereco; }
+    public void setId_endereco(long id_endereco) { this.id_endereco = id_endereco; }
 }

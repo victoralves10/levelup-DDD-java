@@ -4,165 +4,70 @@ import java.time.LocalDate;
 
 public class PessoaCadastro {
 
-    // =================================================================
-    // 1. T_LVUP_LOGIN (Credenciais)
-    // =================================================================
+    // =============================
+    // DADOS DE LOGIN
+    // =============================
     private String login;
     private String senha;
 
-    // =================================================================
-    // 2. T_PESSOA (Dados Pessoais)
-    // =================================================================
-    private String nome; // nm_pessoa
-    private String cpf; // cpf_pessoa
-    private LocalDate dataNascimento; // dt_nascimento
+    // =============================
+    // DADOS PESSOAIS
+    // =============================
+    private String nome;
+    private String cpf;
+    private LocalDate dataNascimento;
 
-    // =================================================================
-    // 3. T_ENDERECO
-    // =================================================================
+    // =============================
+    // ENDEREÇO (compatível com T_ENDERECO)
+    // =============================
     private String cep;
     private String pais;
     private String estado;
     private String cidade;
     private String bairro;
     private String rua;
-    private String numero;
+    private int numero;
     private String complemento;
 
-    // =================================================================
-    // Construtores
-    // =================================================================
+    // =============================
+    // GETTERS E SETTERS
+    // =============================
+    public String getLogin() { return login; }
+    public void setLogin(String login) { this.login = login; }
 
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    /** Construtor padrão (necessário para deserialização JSON/Jackson) */
-    public PessoaCadastro() {
-    }
+    public String getCpf() { return cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
-    public PessoaCadastro(String login, String senha, String nome, String cpf, LocalDate dataNascimento, String cep, String pais, String estado, String cidade, String bairro, String rua, String numero, String complemento) {
-        this.login = login;
-        this.senha = senha;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.cep = cep;
-        this.pais = pais;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.rua = rua;
-        this.numero = numero;
-        this.complemento = complemento;
-    }
+    public LocalDate getDataNascimento() { return dataNascimento; }
+    public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
 
-    /** Construtor com todos os campos (útil para testes ou Services) */
+    public String getCep() { return cep; }
+    public void setCep(String cep) { this.cep = cep; }
 
-    // =================================================================
-    // Getters e Setters
-    // =================================================================
+    public String getPais() { return pais; }
+    public void setPais(String pais) { this.pais = pais; }
 
-    // Login
-    public String getLogin() {
-        return login;
-    }
-    public void setLogin(String login) {
-        this.login = login;
-    }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-    // Senha
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+    public String getCidade() { return cidade; }
+    public void setCidade(String cidade) { this.cidade = cidade; }
 
-    // Nome
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getBairro() { return bairro; }
+    public void setBairro(String bairro) { this.bairro = bairro; }
 
-    // CPF
-    public String getCpf() {
-        return cpf;
-    }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+    public String getRua() { return rua; }
+    public void setRua(String rua) { this.rua = rua; }
 
-    // Data Nascimento
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+    public int getNumero() { return numero; }
+    public void setNumero(int numero) { this.numero = numero; }
 
-    // CEP
-    public String getCep() {
-        return cep;
-    }
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    // País
-    public String getPais() {
-        return pais;
-    }
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    // Estado
-    public String getEstado() {
-        return estado;
-    }
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    // Cidade
-    public String getCidade() {
-        return cidade;
-    }
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    // Bairro
-    public String getBairro() {
-        return bairro;
-    }
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    // Rua
-    public String getRua() {
-        return rua;
-    }
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    // Número
-    public String getNumero() {
-        return numero;
-    }
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    // Complemento
-    public String getComplemento() {
-        return complemento;
-    }
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
+    public String getComplemento() { return complemento; }
+    public void setComplemento(String complemento) { this.complemento = complemento; }
 }

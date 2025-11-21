@@ -1,27 +1,31 @@
 package org.acme.model.DTO.JOINS;
 
-import org.acme.model.T_ENDERECO; // Mantendo as dependências originais
-import org.acme.model.T_LVUP_LOGIN; // Mantendo as dependências originais
-
 import java.time.LocalDate;
-import java.util.Date;
 
 public class DTO_JOIN_PESSOA_LOGIN {
-    // login
+
+    // =============================
+    // LOGIN
+    // =============================
     private long id_login;
     private String login;
     private String senha;
     private String st_ativo;
-    // pessoa
+
+    // =============================
+    // PESSOA
+    // =============================
     private long id_pessoa;
     private String nm_pessoa;
     private String cpf_pessoa;
-    private Date dt_nascimento;
+    private LocalDate dt_nascimento; // agora compatível com repository
 
-    // Construtor para a query de autenticação (simplificado)
-    // Assumimos que o SELECT * está retornando:
-    // id_pessoa, nm_pessoa, cpf_pessoa, dt_nascimento, id_login, login, senha, st_ativo
-    public DTO_JOIN_PESSOA_LOGIN(long id_pessoa, String nm_pessoa, String cpf_pessoa, LocalDate dt_nascimento, long id_login, String login, String senha, String st_ativo) {
+    // =============================
+    // CONSTRUTOR
+    // =============================
+    public DTO_JOIN_PESSOA_LOGIN(long id_pessoa, String nm_pessoa, String cpf_pessoa,
+                                 LocalDate dt_nascimento, long id_login,
+                                 String login, String senha, String st_ativo) {
         this.id_pessoa = id_pessoa;
         this.nm_pessoa = nm_pessoa;
         this.cpf_pessoa = cpf_pessoa;
@@ -32,18 +36,30 @@ public class DTO_JOIN_PESSOA_LOGIN {
         this.st_ativo = st_ativo;
     }
 
-    // Outros campos originais (mantidos para compatibilidade, mas podem ser removidos se não usados)
-    private T_ENDERECO endereco;
-    private T_LVUP_LOGIN fk_login;
+    // =============================
+    // GETTERS E SETTERS
+    // =============================
+    public long getId_pessoa() { return id_pessoa; }
+    public void setId_pessoa(long id_pessoa) { this.id_pessoa = id_pessoa; }
 
+    public String getNm_pessoa() { return nm_pessoa; }
+    public void setNm_pessoa(String nm_pessoa) { this.nm_pessoa = nm_pessoa; }
 
-    // Getters and Setters (Omitidos aqui, mas necessários no arquivo)
+    public String getCpf_pessoa() { return cpf_pessoa; }
+    public void setCpf_pessoa(String cpf_pessoa) { this.cpf_pessoa = cpf_pessoa; }
 
-    public String getNm_pessoa() {
-        return nm_pessoa;
-    }
-    // ... (outros getters/setters)
-    public long getId_login() {
-        return id_login;
-    }
+    public LocalDate getDt_nascimento() { return dt_nascimento; }
+    public void setDt_nascimento(LocalDate dt_nascimento) { this.dt_nascimento = dt_nascimento; }
+
+    public long getId_login() { return id_login; }
+    public void setId_login(long id_login) { this.id_login = id_login; }
+
+    public String getLogin() { return login; }
+    public void setLogin(String login) { this.login = login; }
+
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
+
+    public String getSt_ativo() { return st_ativo; }
+    public void setSt_ativo(String st_ativo) { this.st_ativo = st_ativo; }
 }
