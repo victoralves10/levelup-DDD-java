@@ -126,4 +126,17 @@ public class T_PESSOA_REPOSITORY {
 
         return linhasAfetadas > 0;
     }
+
+    // VALIDAÇÃO SE CPF É EXISTENTE
+    public boolean existeCpf(String cpf) throws SQLException {
+        String sql = "SELECT 1 FROM T_PESSOA WHERE cpf_pessoa = ?";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, cpf);
+            ResultSet rs = pst.executeQuery();
+            return rs.next(); // Se encontrar algum registro, CPF já existe
+        }
+    }
 }

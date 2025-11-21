@@ -19,14 +19,29 @@ public class PessoaService {
     T_PESSOA_REPOSITORY pessoaRepository;
     @Inject
     Cadastro_Pessoa cadastroPessoa;
+    @Inject
+    T_LOGIN_REPOSITORY loginRepository;
 
     public List<T_PESSOA> listarGeral() throws SQLException {
         return pessoaRepository.listarGeral();
     }
 
     public boolean criarContaPessoa(PessoaCadastro np) throws SQLException {
-        return cadastroPessoa.criarContaPessoa(np);
+        if (loginRepository.existeLogin(np.getLogin())){
+            throw new IllegalArgumentException("Login já existe");
+        }
+        if(pessoaRepository.existeCpf(np.getCpf())){
+            throw new IllegalArgumentException("CPF já cadastrado");
+        }
+
+
+        System.out.println("[SERVICE] Iniciando criação de conta para: " + np.getNome());
+        boolean sucesso = cadastroPessoa.criarContaPessoa(np);
+        System.out.println("[SERVICE] Conta criada com sucesso? " + sucesso);
+        return sucesso;
     }
+
+
 
 
 

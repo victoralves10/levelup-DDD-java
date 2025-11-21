@@ -22,34 +22,36 @@ public class LoginCadastroResource {
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces (MediaType.APPLICATION_JSON)
-    public  Response fazerLogin(DTO_T_LOGIN_2 loginDigitado){
-
-        try{
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fazerLogin(DTO_T_LOGIN_2 loginDigitado){
+        try {
+            System.out.println("[RESOURCE] Recebido login: " + loginDigitado.getLogin());
             return Response.ok(loginService.loginExistente(loginDigitado)).build();
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
+            System.err.println("[RESOURCE] Erro SQL: " + e.getMessage());
             return Response.serverError().entity(e.getMessage()).build();
-
-        }catch (IllegalArgumentException il){
+        } catch (IllegalArgumentException il){
+            System.err.println("[RESOURCE] Login inválido: " + il.getMessage());
             return Response.status(Response.Status.UNAUTHORIZED).entity(il.getMessage()).build();
         }
     }
 
-
-
     @POST
     @Path("/cadastro/pessoa")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces (MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response criarPessoa(PessoaCadastro novaPessoa){
-
         try {
-            return Response.ok(pessoaService.criarContaPessoa(novaPessoa)).build();
+            System.out.println("[RESOURCE] Recebido cadastro para: " + novaPessoa.getNome());
+            boolean sucesso = pessoaService.criarContaPessoa(novaPessoa);
+            System.out.println("[RESOURCE] Cadastro concluído: " + sucesso);
+            return Response.ok(sucesso).build();
         } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Não foi possível cadastrar ").build();
+            System.err.println("[RESOURCE] Erro ao cadastrar pessoa: " + e.getMessage()+","+e.getSQLState());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Não foi possível cadastrar").build();
+        }catch (IllegalArgumentException il){
+            System.err.println("[RESOURCE] Erro de validação: " + il.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(il.getMessage()).build();
         }
     }
-
-
 }
