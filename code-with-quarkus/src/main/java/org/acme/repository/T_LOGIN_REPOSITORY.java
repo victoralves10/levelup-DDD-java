@@ -3,6 +3,7 @@ package org.acme.repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.model.DTO.DTO_T_LOGIN;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.model.T_LVUP_LOGIN;
 
@@ -61,5 +62,34 @@ public class T_LOGIN_REPOSITORY {
 
     }
 
-    
+    public Long inserirLoginRetornandoId(DTO_T_LOGIN novoLogin) throws SQLException {
+
+        Long idGerado = null;
+
+        String sql = """
+            INSERT INTO T_LVUP_LOGIN
+            (login, senha, st_ativo)
+            VALUES (?, ?, 'S')
+            """;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            pst.setString(1, novoLogin.getLogin());
+            pst.setString(2, novoLogin.getSenha());
+
+            pst.executeUpdate();
+
+            try (ResultSet rs = pst.getGeneratedKeys()) {
+                if (rs.next()) {
+                    idGerado = rs.getLong(1);
+                } else {
+                    throw new SQLException("Nenhum ID foi retornado pelo banco ao inserir login.");
+                }
+            }
+        }
+
+        return idGerado;
+    }
+
 }
