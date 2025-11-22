@@ -7,11 +7,10 @@ public class DTO_T_INST_ACADEMICA {
     private String nm_instAcademica;
     private String st_ativo;
     private String cnpj;
-    private T_ENDERECO endereco;
-    private T_LVUP_LOGIN login;
+    private long endereco;
+    private long login;
 
-    // Construtor Completo
-    public DTO_T_INST_ACADEMICA(String nm_instAcademica, String st_ativo, String cnpj, T_ENDERECO endereco, T_LVUP_LOGIN login) {
+    public DTO_T_INST_ACADEMICA(String nm_instAcademica, String st_ativo, String cnpj, long endereco, long login) {
         this.nm_instAcademica = nm_instAcademica;
         this.st_ativo = st_ativo;
         this.cnpj = cnpj;
@@ -20,7 +19,7 @@ public class DTO_T_INST_ACADEMICA {
     }
 
 
-    // -------- GETTER E SETTER ---------
+
     public String getNm_instAcademica() {
         return nm_instAcademica;
     }
@@ -45,19 +44,19 @@ public class DTO_T_INST_ACADEMICA {
         this.cnpj = cnpj;
     }
 
-    public T_ENDERECO getEndereco() {
+    public long getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(T_ENDERECO endereco) {
+    public void setEndereco(long endereco) {
         this.endereco = endereco;
     }
 
-    public T_LVUP_LOGIN getLogin() {
+    public long getLogin() {
         return login;
     }
 
-    public void setLogin(T_LVUP_LOGIN login) {
+    public void setLogin(long login) {
         this.login = login;
     }
 }

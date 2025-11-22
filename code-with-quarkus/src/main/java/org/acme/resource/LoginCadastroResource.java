@@ -5,9 +5,11 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.model.DTO.CADASTRO.EmpresaCadastro;
+import org.acme.model.DTO.CADASTRO.InstituicaoCadastro;
 import org.acme.model.DTO.CADASTRO.PessoaCadastro;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.service.EmpresaService;
+import org.acme.service.InstAcademicaService;
 import org.acme.service.LoginService;
 import org.acme.service.PessoaService;
 
@@ -22,6 +24,8 @@ public class LoginCadastroResource {
     PessoaService pessoaService;
     @Inject
     EmpresaService empresaService;
+    @Inject
+    InstAcademicaService instituicaoService;
 
     @POST
     @Path("/login")
@@ -85,5 +89,35 @@ public class LoginCadastroResource {
         }
     }
 
-    
+    @POST
+    @Path("/cadastro/instituicao")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response criarInstituicao(InstituicaoCadastro novaInst) {
+        try {
+            System.out.println("[RESOURCE] Recebido cadastro de Instituição: "
+                    + novaInst.getNm_instAcademica());
+
+            boolean sucesso = instituicaoService.criarContaInstituicao(novaInst);
+
+            System.out.println("[RESOURCE] Cadastro de instituição concluído: " + sucesso);
+            return Response.ok(sucesso).build();
+
+        } catch (SQLException e) {
+            System.err.println("[RESOURCE] ERRO SQL ao cadastrar instituição: "
+                    + e.getMessage() + " | SQLState=" + e.getSQLState());
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao cadastrar instituição acadêmica.")
+                    .build();
+
+        } catch (IllegalArgumentException il) {
+            System.err.println("[RESOURCE] Erro de validação (instituição): " + il.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(il.getMessage())
+                    .build();
+        }
+    }
+
+
 }

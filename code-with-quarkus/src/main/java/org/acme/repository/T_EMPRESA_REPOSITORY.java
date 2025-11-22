@@ -98,4 +98,18 @@ public class T_EMPRESA_REPOSITORY {
             return linhasAfetadas > 0;
         }
     }
+
+    public boolean cnpjExiste(String cnpj) throws SQLException {
+        String sql = "SELECT 1 FROM T_INST_ACADEMICA WHERE cnpj_inst_academica = ?";
+
+        try (Connection conn = datasource.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, cnpj);
+
+            ResultSet rs = pst.executeQuery();
+
+            return rs.next(); // Se encontrou registro, o CNPJ já existe
+        }
+    }
 }

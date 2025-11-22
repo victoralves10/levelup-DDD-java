@@ -6,6 +6,7 @@ import org.acme.model.DTO.CADASTRO.EmpresaCadastro;
 import org.acme.model.DTO.DTO_T_EMPRESA;
 import org.acme.model.T_EMPRESA;
 import org.acme.repository.T_EMPRESA_REPOSITORY;
+import org.acme.repository.T_LOGIN_REPOSITORY;
 import org.acme.repository_intermediario.Cadastro_Empresa;
 
 import java.sql.SQLException;
@@ -19,6 +20,8 @@ public class EmpresaService {
     T_EMPRESA_REPOSITORY empresaRepository;
     @Inject
     Cadastro_Empresa cadastroEmpresa;
+    @Inject
+    T_LOGIN_REPOSITORY loginRepository;
 
     public List<T_EMPRESA> listarEmpresas () throws SQLException {
 
@@ -55,6 +58,12 @@ public class EmpresaService {
 
         if (novaEmpresa.getLogin() == null || novaEmpresa.getLogin().isBlank()) {
             throw new IllegalArgumentException("Login da empresa é obrigatório.");
+        }
+        if (empresaRepository.cnpjExiste(novaEmpresa.getCnpj())){
+            throw new IllegalArgumentException("Esse CNPJ já existe.");
+        }
+        if (loginRepository.existeLogin(novaEmpresa.getLogin())){
+            throw new IllegalArgumentException("Esse Login já existe");
         }
 
 
