@@ -2,6 +2,7 @@ package org.acme.repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.model.DTO.DTO_T_EMPRESA;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.model.DTO.JOINS.DTO_JOIN_EMPRESA_LOGIN;
 import org.acme.model.T_EMPRESA;
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,4 +72,30 @@ public class T_EMPRESA_REPOSITORY {
         }
     }
 
+    public boolean inserirEmpresa(DTO_T_EMPRESA empresa) throws SQLException {
+        String sql = """
+            INSERT INTO T_EMPRESA 
+            (nm_empresa, cnpj_empresa, email_empresa, dt_cadastro, st_empresa, id_endereco, id_login)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """;
+
+        // Define data e status padrão se não vierem do DTO
+        LocalDate dtCadastro = empresa.getDt_cadastro() != null ? empresa.getDt_cadastro() : LocalDate.now();
+        char status = empresa.getSt_empresa() != 0 ? empresa.getSt_empresa() : 'A';
+
+        try (Connection con = datasource.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1, empresa.getNm_empresa());
+            pst.setString(2, empresa.getCnpj_empresa());
+            pst.setString(3, empresa.getEmail_empresa());
+            pst.setDate(4, java.sql.Date.valueOf(dtCadastro));
+            pst.setString(5, String.valueOf(status));
+            pst.setLong(6, empresa.getEndereco());
+            pst.setLong(7, empresa.getLogin());
+
+            int linhasAfetadas = pst.executeUpdate();
+            return linhasAfetadas > 0;
+        }
+    }
 }

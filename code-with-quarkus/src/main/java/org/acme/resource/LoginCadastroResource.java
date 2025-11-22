@@ -4,8 +4,10 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.model.DTO.CADASTRO.EmpresaCadastro;
 import org.acme.model.DTO.CADASTRO.PessoaCadastro;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
+import org.acme.service.EmpresaService;
 import org.acme.service.LoginService;
 import org.acme.service.PessoaService;
 
@@ -18,6 +20,8 @@ public class LoginCadastroResource {
     LoginService loginService;
     @Inject
     PessoaService pessoaService;
+    @Inject
+    EmpresaService empresaService;
 
     @POST
     @Path("/login")
@@ -54,4 +58,32 @@ public class LoginCadastroResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(il.getMessage()).build();
         }
     }
+
+
+    @POST
+    @Path("/cadastro/empresa")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response criarEmpresa(EmpresaCadastro novaEmpresa){
+        try {
+            System.out.println("[RESOURCE] Recebido cadastro de empresa: " + novaEmpresa.getNome_empresa());
+            boolean sucesso = empresaService.criarContaEmpresa(novaEmpresa);
+
+            System.out.println("[RESOURCE] Cadastro de empresa concluído: " + sucesso);
+            return Response.ok(sucesso).build();
+
+        } catch (SQLException e) {
+            System.err.println("[RESOURCE] Erro ao cadastrar empresa: "
+                    + e.getMessage() + " | SQLState=" + e.getSQLState());
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Não foi possível cadastrar").build();
+
+        } catch (IllegalArgumentException il) {
+            System.err.println("[RESOURCE] Erro de validação (empresa): " + il.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(il.getMessage()).build();
+        }
+    }
+
+    
 }

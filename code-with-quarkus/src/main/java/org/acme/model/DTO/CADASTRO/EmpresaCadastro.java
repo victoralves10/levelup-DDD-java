@@ -15,7 +15,6 @@ public class EmpresaCadastro {
     private String nome_empresa;      // nm_empresa
     private String cnpj;              // cnpj_empresa
     private String email;             // email_empresa
-    private String status;            // st_empresa ('A' ou 'I')
     private String dt_cadastro;       // Mantido como string para receber do frontend
 
     // =============================
@@ -50,9 +49,6 @@ public class EmpresaCadastro {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
 
     public String getDt_cadastro() { return dt_cadastro; }
     public void setDt_cadastro(String dt_cadastro) { this.dt_cadastro = dt_cadastro; }
