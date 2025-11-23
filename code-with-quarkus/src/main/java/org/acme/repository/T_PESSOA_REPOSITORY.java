@@ -5,6 +5,8 @@ import jakarta.inject.Inject;
 
 import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.model.DTO.DTO_T_PESSOA;
+import org.acme.model.DTO.DTO_T_PESSOA_2;
+import org.acme.model.DTO.JOINS.DTO_EVENTOxPESSOA_RETORNO;
 import org.acme.model.DTO.JOINS.DTO_JOIN_PESSOA_LOGIN;
 import org.acme.model.T_PESSOA;
 
@@ -144,4 +146,69 @@ public class T_PESSOA_REPOSITORY {
             return rs.next(); // Se encontrar algum registro, CPF já existe
         }
     }
+
+
+    public List<DTO_EVENTOxPESSOA_RETORNO> listarEventosPorPessoa(long idPessoa) throws SQLException {
+        String sql = """
+            SELECT e.id_evento, e.nm_evento, e.descricao_evento, e.qt_dias, e.dt_inicio_evento
+            FROM T_LVUP_EVENTO e
+            JOIN PESSOA_EVENTO pe ON e.id_evento = pe.id_evento
+            WHERE pe.id_pessoa = ?
+        """;
+
+        List<DTO_EVENTOxPESSOA_RETORNO> lista = new ArrayList<>();
+
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setLong(1, idPessoa);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(new DTO_EVENTOxPESSOA_RETORNO(
+                            rs.getLong("id_evento"),
+                            rs.getString("nm_evento"),
+                            rs.getString("descricao_evento"),
+                            rs.getInt("qt_dias"),
+                            rs.getDate("dt_inicio_evento").toLocalDate()
+                    ));
+                }
+            }
+        }
+
+        return lista;
+    }
+
+
+    public DTO_T_PESSOA_2 buscarDadosPessoaisPorId(Long idPessoa) throws SQLException {
+
+        String sql = """
+        SELECT nm_pessoa, cpf_pessoa, dt_nascimento,id_endereco
+        FROM T_PESSOA
+        WHERE id_pessoa = ?
+    """;
+
+        DTO_T_PESSOA_2 pessoa = null;
+
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setLong(1, idPessoa);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    pessoa = new DTO_T_PESSOA_2(
+                            rs.getString("nm_pessoa"),
+                            rs.getString("cpf_pessoa"),
+                            rs.getDate("dt_nascimento").toLocalDate(),
+                            rs.getInt("id_endereco")
+                    );
+                }
+            }
+        }
+
+        return pessoa;
+    }
+
+
 }

@@ -89,5 +89,41 @@ public class T_ENDERECO_REPOSITORY {
     }
 
 
+    public DTO_T_ENDERECO buscarEnderecoPorId(Long idEndereco) throws SQLException {
+
+        String sql = """
+        SELECT cep, pais, estado, cidade, bairro, rua, numero, complemento
+        FROM T_ENDERECO
+        WHERE id_endereco = ?
+    """;
+
+        DTO_T_ENDERECO endereco = null;
+
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setLong(1, idEndereco);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+
+                    endereco = new DTO_T_ENDERECO(
+                            rs.getString("cep"),
+                            rs.getString("pais"),
+                            rs.getString("estado"),
+                            rs.getString("cidade"),
+                            rs.getString("bairro"),
+                            rs.getString("rua"),
+                            rs.getInt("numero"),
+                            rs.getString("complemento")
+                    );
+                }
+            }
+        }
+
+        return endereco;
+    }
+
+
 
 }

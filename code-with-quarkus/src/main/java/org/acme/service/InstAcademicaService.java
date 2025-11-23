@@ -9,6 +9,7 @@ import org.acme.repository.T_LOGIN_REPOSITORY;
 import org.acme.repository_intermediario.Cadastro_Instituicao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @ApplicationScoped
 public class InstAcademicaService {
@@ -22,6 +23,11 @@ public class InstAcademicaService {
     @Inject
     T_INST_ACADEMICA_REPOSITORY instAcademicaRepository;
 
+
+    public List<T_INST_ACADEMICA> listarInstAcademicas() throws SQLException {
+
+        return instAcademicaRepository.listarInstAcademicas();
+    }
 
     // ================================
     // ===== CRIAR CONTA INSTITUIÇÃO ==

@@ -3,8 +3,9 @@ package org.acme.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.model.DTO.CADASTRO.PessoaCadastro;
+import org.acme.model.DTO.DTO_T_PESSOA_2;
+import org.acme.model.DTO.JOINS.DTO_EVENTOxPESSOA_RETORNO;
 import org.acme.model.T_PESSOA;
-import org.acme.repository.T_INST_ACADEMICA_REPOSITORY;
 import org.acme.repository.T_LOGIN_REPOSITORY;
 import org.acme.repository.T_PESSOA_REPOSITORY;
 import org.acme.repository_intermediario.Cadastro_Pessoa;
@@ -41,7 +42,14 @@ public class PessoaService {
         return sucesso;
     }
 
+    public List<DTO_EVENTOxPESSOA_RETORNO> listarEventosPorPessoa(long idPessoa)throws SQLException{
 
+        return pessoaRepository.listarEventosPorPessoa(idPessoa);
+    }
+
+    public DTO_T_PESSOA_2 buscarDadosPessoais(Long idPessoa) throws SQLException {
+        return pessoaRepository.buscarDadosPessoaisPorId(idPessoa);
+    }
 
 
 

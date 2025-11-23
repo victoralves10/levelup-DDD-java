@@ -4,10 +4,14 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.model.DTO.DTO_T_ENDERECO;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
+import org.acme.model.DTO.DTO_T_LVUP_EVENTO;
+import org.acme.model.DTO.JOINS.DTO_EVENTOxPESSOA_RETORNO;
 import org.acme.service.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Path("/listagem")
 public class GreetingResource {
@@ -24,6 +28,8 @@ public class GreetingResource {
     InstAcademicaService instAcademicaService;
     @Inject
     VagaEmpresaService vagaEmpresaService;
+    @Inject
+    EventoService eventoService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,13 +101,22 @@ public class GreetingResource {
         }
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces (MediaType.APPLICATION_JSON)
-    public  Response criarConta_Empresa(){
 
-        return Response.ok().build();
+    @GET
+    @Path("/eventos")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarTodos() {
+        try {
+            List<DTO_T_LVUP_EVENTO> eventos = eventoService.listarTodosEventos();
+            return Response.ok(eventos).build();
+        } catch (SQLException e) {
+            System.err.println("[RESOURCE] Erro ao listar eventos: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Não foi possível listar os eventos.")
+                    .build();
+        }
     }
+
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
@@ -110,5 +125,55 @@ public class GreetingResource {
 
         return Response.ok().build();
     }
+
+    @GET
+    @Path("/pessoa/{idPessoa}")
+    @Produces (MediaType.APPLICATION_JSON)
+    public Response listarEventosPessoa(@PathParam("idPessoa") long idPessoa) {
+        System.out.println("Chamou listarEventosPessoa com idPessoa = " + idPessoa); // DEBUG
+        try {
+            List<DTO_EVENTOxPESSOA_RETORNO> eventos = pessoaService.listarEventosPorPessoa(idPessoa);
+            System.out.println("Quantidade de eventos encontrados: " + eventos.size()); // DEBUG
+            return Response.ok(eventos).build();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Mostra o erro completo no console
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao buscar eventos da pessoa")
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("/pessoa/dadospessoais/{idPessoa}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarDadosPessoais(@PathParam("idPessoa") Long idPessoa) {
+        try {
+            return Response.ok(
+                    pessoaService.buscarDadosPessoais(idPessoa)
+            ).build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao buscar dados pessoais da pessoa.")
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("/minhaconta/dadosendereco/{idEndereco}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarEndereco(@PathParam("idEndereco") Long idEndereco) {
+        try {
+            DTO_T_ENDERECO endereco = enderecoService.buscarEnderecoPorId(idEndereco);
+            return Response.ok(endereco).build();
+
+        } catch (SQLException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao buscar endereço: " + e.getMessage())
+                    .build();
+        }
+    }
+
+
 
 }

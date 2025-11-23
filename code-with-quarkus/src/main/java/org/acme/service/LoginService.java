@@ -48,6 +48,7 @@ public class LoginService {
 
 
     public DTO_AUTENTICACAO_RETORNO loginExistente(DTO_T_LOGIN_2 loginDigitado) throws SQLException{
+        long id_usuario;
         String perfil ;
         String nm_usuario;
         String token ;
@@ -57,27 +58,26 @@ public class LoginService {
         DTO_JOIN_INSTITUICAO_LOGIN possivelInstituicao =instAcademicaRepository.autenticaInstituicaoLogin(loginDigitado);
 
         if (possivelPessoa != null){
+            id_usuario = possivelPessoa.getId_pessoa(); // ✅ id real da pessoa
             perfil = "pessoa";
-            nm_usuario=possivelPessoa.getNm_pessoa();
+            nm_usuario = possivelPessoa.getNm_pessoa();
             token = TokenService.gerarToken(possivelPessoa.getId_login());
-
-        } else if (possivelEmpresa!=null) {
+        } else if (possivelEmpresa != null) {
+            id_usuario = possivelEmpresa.getId_empresa(); // ✅ id real da empresa
             perfil = "empresa";
-            nm_usuario=possivelEmpresa.getNm_empresa();
-            token = TokenService.gerarToken(possivelEmpresa.getId_empresa());
-
-        } else if (possivelInstituicao!=null) {
+            nm_usuario = possivelEmpresa.getNm_empresa();
+            token = TokenService.gerarToken(possivelEmpresa.getId_login());
+        } else if (possivelInstituicao != null) {
+            id_usuario = possivelInstituicao.getId_instituicao(); // ✅ id real da instituição
             perfil = "instituicaoAcademica";
-            nm_usuario=possivelInstituicao.getNm_instituicao();
-            token = TokenService.gerarToken(possivelInstituicao.getId_instituicao());
-
-        }else {
+            nm_usuario = possivelInstituicao.getNm_instituicao();
+            token = TokenService.gerarToken(possivelInstituicao.getId_login());
+        } else {
             throw new IllegalArgumentException("Login ou Senha inválidos.");
-
         }
 
 
-        return new DTO_AUTENTICACAO_RETORNO(nm_usuario,perfil,token);
+        return new DTO_AUTENTICACAO_RETORNO(token,perfil,nm_usuario,id_usuario);
 
 
 
