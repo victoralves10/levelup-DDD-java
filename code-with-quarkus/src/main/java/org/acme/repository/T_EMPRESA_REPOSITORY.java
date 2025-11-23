@@ -3,6 +3,7 @@ package org.acme.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.model.DTO.DTO_T_EMPRESA;
+import org.acme.model.DTO.DTO_T_EMPRESA_2;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.model.DTO.JOINS.DTO_JOIN_EMPRESA_LOGIN;
 import org.acme.model.T_EMPRESA;
@@ -112,4 +113,35 @@ public class T_EMPRESA_REPOSITORY {
             return rs.next(); // Se encontrou registro, o CNPJ já existe
         }
     }
+
+
+    public DTO_T_EMPRESA_2 buscarDadosEmpresariais(Long idEmpresa) throws SQLException {
+        DTO_T_EMPRESA_2 empresa = null;
+
+        String sql = """
+            SELECT nm_empresa, cnpj_empresa, email_empresa, dt_cadastro, id_endereco
+            FROM T_EMPRESA
+            WHERE id_empresa = ?
+        """;
+
+        try (Connection conn = datasource.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setLong(1, idEmpresa);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    empresa = new DTO_T_EMPRESA_2();
+                    empresa.setNm_empresa(rs.getString("nm_empresa"));
+                    empresa.setCnpj_empresa(rs.getString("cnpj_empresa"));
+                    empresa.setEmail_empresa(rs.getString("email_empresa"));
+                    empresa.setDt_cadastro(rs.getDate("dt_cadastro").toLocalDate());
+                    empresa.setId_endereco(rs.getLong("id_endereco"));
+                }
+            }
+        }
+
+        return empresa;
+    }
+
 }

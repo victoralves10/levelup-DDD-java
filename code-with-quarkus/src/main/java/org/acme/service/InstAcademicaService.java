@@ -3,6 +3,7 @@ package org.acme.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.model.DTO.CADASTRO.InstituicaoCadastro;
+import org.acme.model.DTO.DTO_T_INST_ACADEMICA_2;
 import org.acme.model.T_INST_ACADEMICA;
 import org.acme.repository.T_INST_ACADEMICA_REPOSITORY;
 import org.acme.repository.T_LOGIN_REPOSITORY;
@@ -63,5 +64,11 @@ public class InstAcademicaService {
         System.out.println("[SERVICE] Conta criada com sucesso? " + sucesso);
         return sucesso;
 
+    }
+
+
+    public DTO_T_INST_ACADEMICA_2 getInstituicaoById(long idInstituicao) throws SQLException {
+        DTO_T_INST_ACADEMICA_2 instituicao = instAcademicaRepository.getInstituicaoById(idInstituicao);
+        return instituicao;
     }
 }

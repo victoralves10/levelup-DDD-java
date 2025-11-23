@@ -3,6 +3,7 @@ package org.acme.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.model.DTO.DTO_T_INST_ACADEMICA;
+import org.acme.model.DTO.DTO_T_INST_ACADEMICA_2;
 import org.acme.model.DTO.DTO_T_LOGIN_2;
 import org.acme.model.DTO.JOINS.DTO_JOIN_INSTITUICAO_LOGIN;
 import org.acme.model.T_INST_ACADEMICA;
@@ -100,7 +101,6 @@ public class T_INST_ACADEMICA_REPOSITORY {
         }
     }
 
-
     public boolean cnpjExiste(String cnpj) throws SQLException {
         String sql = "SELECT 1 FROM T_INST_ACADEMICA WHERE cnpj_inst_academica = ?";
 
@@ -113,5 +113,31 @@ public class T_INST_ACADEMICA_REPOSITORY {
 
             return rs.next(); // Se encontrou registro, o CNPJ já existe
         }
+    }
+
+    public DTO_T_INST_ACADEMICA_2 getInstituicaoById(long idInstituicao) throws SQLException {
+        String sql = """
+            SELECT id_instAcademica, nm_instAcademica, cnpj_inst_academica, id_endereco
+            FROM T_INST_ACADEMICA
+            WHERE id_instAcademica = ?
+        """;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setLong(1, idInstituicao);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return new DTO_T_INST_ACADEMICA_2(
+                            rs.getString("nm_instAcademica"),
+                            rs.getString("cnpj_inst_academica"),
+                            rs.getLong("id_endereco")
+                    );
+                }
+            }
+        }
+
+        return null; // Caso a instituição não seja encontrada
     }
 }

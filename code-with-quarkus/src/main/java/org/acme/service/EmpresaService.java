@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.model.DTO.CADASTRO.EmpresaCadastro;
 import org.acme.model.DTO.DTO_T_EMPRESA;
+import org.acme.model.DTO.DTO_T_EMPRESA_2;
 import org.acme.model.T_EMPRESA;
 import org.acme.repository.T_EMPRESA_REPOSITORY;
 import org.acme.repository.T_LOGIN_REPOSITORY;
@@ -70,4 +71,8 @@ public class EmpresaService {
         return cadastroEmpresa.criarContaEmpresa(novaEmpresa);
     }
 
+
+    public DTO_T_EMPRESA_2 buscarDadosEmpresariais(Long idEmpresa) throws SQLException {
+        return empresaRepository.buscarDadosEmpresariais(idEmpresa);
+    }
 }

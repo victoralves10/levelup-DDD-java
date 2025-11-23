@@ -4,9 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.model.DTO.DTO_T_ENDERECO;
-import org.acme.model.DTO.DTO_T_LOGIN_2;
-import org.acme.model.DTO.DTO_T_LVUP_EVENTO;
+import org.acme.model.DTO.*;
 import org.acme.model.DTO.JOINS.DTO_EVENTOxPESSOA_RETORNO;
 import org.acme.service.*;
 
@@ -30,6 +28,7 @@ public class GreetingResource {
     VagaEmpresaService vagaEmpresaService;
     @Inject
     EventoService eventoService;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -160,6 +159,23 @@ public class GreetingResource {
     }
 
     @GET
+    @Path("/empresa/dadosEmpresariais/{idEmpresa}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarDadosEmpresariais(@PathParam("idEmpresa") Long idEmpresa) {
+        try {
+            // Chama o service que retorna DTO_T_EMPRESA_2
+            DTO_T_EMPRESA_2 dadosEmpresa = empresaService.buscarDadosEmpresariais(idEmpresa);
+            return Response.ok(dadosEmpresa).build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao buscar dados empresariais da empresa.")
+                    .build();
+        }
+    }
+
+
+    @GET
     @Path("/minhaconta/dadosendereco/{idEndereco}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response buscarEndereco(@PathParam("idEndereco") Long idEndereco) {
@@ -175,5 +191,36 @@ public class GreetingResource {
     }
 
 
+    @GET
+    @Path("/minhas-demandas/{idEmpresa}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarMinhasDemandas(@PathParam("idEmpresa") Long idEmpresa) {
+        try {
+            // Chama o service para buscar as vagas/demandas da empresa
+            List<DTO_T_VAGA_EMPRESA> vagas = vagaEmpresaService.listarVagasPorEmpresa(idEmpresa);
+            return Response.ok(vagas).build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao buscar vagas/demandas da empresa.")
+                    .build();
+        }
+    }
+
+
+    @GET
+    @Path("/minhaconta/dadosinstituicao/{idInstituicao}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMinhaConta(@PathParam("idInstituicao") long idInstituicao) {
+        try {
+            DTO_T_INST_ACADEMICA_2 dados = instAcademicaService.getInstituicaoById(idInstituicao);
+            return Response.ok(dados).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao consultar a instituição: " + e.getMessage()).build();
+        }
+    }
 
 }

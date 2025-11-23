@@ -4,10 +4,12 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.model.DTO.DTO_JOIN_ENDERECO_EVENTO;
 import org.acme.model.DTO.EVENTO.EVENTO_PESSOA;
 import org.acme.service.EventoService;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Path("/evento")
 public class EventoResource {
@@ -50,6 +52,30 @@ public class EventoResource {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Erro ao remover inscrição")
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("/listar")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarEventosComEndereco() {
+
+        try {
+            List<DTO_JOIN_ENDERECO_EVENTO> lista = eventoService.listarEventosComEndereco();
+
+            return Response.ok(lista).build();
+
+        } catch (IllegalArgumentException e) {
+
+            return Response.status(Response.Status.NO_CONTENT)
+                    .entity("Nenhum evento encontrado.")
+                    .build();
+
+        } catch (SQLException e) {
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao buscar eventos: " + e.getMessage())
                     .build();
         }
     }

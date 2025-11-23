@@ -3,6 +3,7 @@ package org.acme.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.acme.model.DTO.DTO_JOIN_ENDERECO_EVENTO;
 import org.acme.model.DTO.DTO_T_LVUP_EVENTO;
 import org.acme.model.T_LVUP_EVENTO;
 
@@ -112,6 +113,44 @@ public class T_EVENTO_REPOSITORY {
 
             return rs.next() && rs.getInt(1) > 0;
         }
+    }
+
+    public List<DTO_JOIN_ENDERECO_EVENTO> listarEventosComEndereco() throws SQLException {
+        String sql = """
+                SELECT e.id_evento, e.nm_evento, e.descricao_evento, e.qt_dias, e.dt_inicio_evento,
+                       en.id_endereco, en.cep, en.pais, en.estado, en.cidade, en.bairro, en.rua, en.numero, en.complemento
+                FROM T_LVUP_EVENTO e
+                INNER JOIN T_ENDERECO en ON e.id_endereco = en.id_endereco
+                """;
+
+        List<DTO_JOIN_ENDERECO_EVENTO> listaEventos = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                DTO_JOIN_ENDERECO_EVENTO evento = new DTO_JOIN_ENDERECO_EVENTO(
+                        rs.getLong("id_evento"),
+                        rs.getString("nm_evento"),
+                        rs.getString("descricao_evento"),
+                        rs.getInt("qt_dias"),
+                        rs.getDate("dt_inicio_evento"),
+                        rs.getLong("id_endereco"),
+                        rs.getString("cep"),
+                        rs.getString("pais"),
+                        rs.getString("estado"),
+                        rs.getString("cidade"),
+                        rs.getString("bairro"),
+                        rs.getString("rua"),
+                        rs.getInt("numero"),
+                        rs.getString("complemento")
+                );
+                listaEventos.add(evento);
+            }
+        }
+
+        return listaEventos;
     }
 
 
