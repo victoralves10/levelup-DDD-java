@@ -21,7 +21,7 @@ public class EventoResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response inscreverPessoa(EVENTO_PESSOA inscr) {
         try {
-            eventoService.inscreverPessoa(inscr.getIdEvento(), inscr.getIdPessoa());
+            eventoService.inscreverPessoa(inscr.getIdPessoa(), inscr.getIdEvento());
             return Response.ok().entity("Inscrição realizada com sucesso").build();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -30,6 +30,7 @@ public class EventoResource {
                     .build();
         }
     }
+
 
 
     @DELETE

@@ -29,15 +29,19 @@ public class EventoService {
     @Transactional
     public void inscreverPessoa(int idPessoa, int idEvento) throws SQLException {
         boolean inscrito = eventoRepository.estaInscrito(idPessoa, idEvento);
-        if (inscrito) throw new IllegalStateException("Já inscrito");
-
-        eventoRepository.inscreverPessoaEmEvento(idPessoa, idEvento);
+        if (!inscrito) {
+            eventoRepository.inscreverPessoaEmEvento(idPessoa, idEvento);
+        }
+        // Se já está inscrito, não faz nada
     }
 
+    // REMOVER INSCRIÇÃO
     @Transactional
     public void removerInscricao(int idPessoa, int idEvento) throws SQLException {
         int deleted = eventoRepository.removerPessoaDoEvento(idPessoa, idEvento);
-        if (deleted == 0) throw new IllegalStateException("Não inscrito nesse evento");
+        if (deleted == 0) {
+            throw new IllegalStateException("Não inscrito nesse evento");
+        }
     }
 
     public boolean isInscrito(int idPessoa, int idEvento) throws SQLException {
