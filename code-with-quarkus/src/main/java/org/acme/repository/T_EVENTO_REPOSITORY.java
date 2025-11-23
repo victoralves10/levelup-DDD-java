@@ -78,4 +78,37 @@ public class T_EVENTO_REPOSITORY {
         return null;
     }
 
+    public void inscreverPessoaEmEvento(int idPessoa, int idEvento) throws SQLException {
+        String sql = "INSERT INTO PESSOA_EVENTO (id_pessoa, id_evento) VALUES (?, ?)";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idPessoa);
+            stmt.setInt(2, idEvento);
+            stmt.executeUpdate();
+        }
+    }
+
+    public int removerPessoaDoEvento(int idPessoa, int idEvento) throws SQLException {
+        String sql = "DELETE FROM PESSOA_EVENTO WHERE id_pessoa = ? AND id_evento = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idPessoa);
+            stmt.setInt(2, idEvento);
+            return stmt.executeUpdate(); // retorna linhas deletadas
+        }
+    }
+
+
+    public boolean estaInscrito(int idPessoa, int idEvento) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM PESSOA_EVENTO WHERE id_pessoa = ? AND id_evento = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idPessoa);
+            stmt.setInt(2, idEvento);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next() && rs.getInt(1) > 0;
+        }
+    }
+
+
 }
